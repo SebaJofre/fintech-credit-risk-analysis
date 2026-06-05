@@ -27,4 +27,7 @@ Es importante dar respuesta a esta pregunta porque en finanzas, a mayor riesgo, 
 
 Se cruzarn los datos reales con las metas mensuales para ver si se esta cumpliendo con el presupuesto de colocación sin disparar la morosidad
 
-
+### Herramientas a utilizar:
+1. `Google Sheets`: para la creación de metas de negocio.
+2. `PostgreSQL`: para la limpieza, transformación y modelado de transacciones.
+4. `Power BI`: para la creación de un dashboard que responda preguntas a la Dirección.
