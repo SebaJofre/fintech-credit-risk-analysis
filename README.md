@@ -6,8 +6,25 @@ Maximizar la rentabilidad de la Fintech mediante la identificación y mitigació
 En palabras sencillas, es crear un sistema de analítica inteligente que le permita a la empresa seguir prestando dinero para crecer, pero bloqueando o evitando automáticamente a los clientes que tienen una alta probabilidad de no pagar, ahorrando millones en pérdidas.
 
 ### Preguntas de Negocio a Responder
-1. ¿Cuál es la Tasa de Morosidad (Bad Loan Ratio) y cuánto dinero está costando?
+
+**1. ¿Cuál es la Tasa de Morosidad (Bad Loan Ratio) y cuánto dinero está costando?**
    
 Se necesita saber si se esta por encima del límite de peligro del negocio (Ej. más de un 5% de pérdidas) y cuántos millones de dólares representan los préstamos que ya se dan por perdidos.
 
-2. 
+**2. ¿Qué perfil de cliente es el más peligroso para la empresa?**
+
+Se pretende descubrir qué variables aumentan el riesgo. Por ejemplo: ¿Los usuarios que alquilan vivienda e tienen ingresos menos de $30.000 al año tienen una tasa de impago inaceptable? Si la respuesta es afirmativa se deben modificar las reglas de aprobación de créditos.
+
+**3. ¿Para qué se usa el dinero que no regresa?**
+
+Se analizará el propósito del préstamos (loan intent). Por ejemplo: Si se determina que los créditos solicitados para la "Gastos Médicos" fallan el triple que los de "Educación".
+
+**4. ¿Se está cobrando el interés correcto según el riesgo del cliente?**
+
+Es importante dar respuesta a esta pregunta porque en finanzas, a mayor riesgo, mayor tase de interés. Se debe comprobar que si la FinTech le está cobrando una tasa más alta a los clientes con peor historial, o si se esta cometiendo el error de cobrarle lo mismo a todos.
+
+**5. ¿Cómo va el rendimiento del mes frente a las metas que se plantea la empresa?**
+
+Se cruzarn los datos reales con las metas mensuales para ver si se esta cumpliendo con el presupuesto de colocación sin disparar la morosidad
+
+
