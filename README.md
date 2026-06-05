@@ -5,6 +5,11 @@ Maximizar la rentabilidad de la Fintech mediante la identificación y mitigació
 
 En palabras sencillas, es crear un sistema de analítica inteligente que le permita a la empresa seguir prestando dinero para crecer, pero bloqueando o evitando automáticamente a los clientes que tienen una alta probabilidad de no pagar, ahorrando millones en pérdidas.
 
+### Herramientas a utilizar:
+1. `Google Sheets`: para la creación de metas de negocio.
+2. `PostgreSQL`: para la limpieza, transformación y modelado de transacciones.
+3. `Power BI`: para la creación de un dashboard que responda preguntas a la Dirección.
+
 ### Preguntas de Negocio a Responder
 
 **1. ¿Cuál es la Tasa de Morosidad (Bad Loan Ratio) y cuánto dinero está costando?**
@@ -27,7 +32,4 @@ Es importante dar respuesta a esta pregunta porque en finanzas, a mayor riesgo, 
 
 Se cruzarn los datos reales con las metas mensuales para ver si se esta cumpliendo con el presupuesto de colocación sin disparar la morosidad
 
-### Herramientas a utilizar:
-1. `Google Sheets`: para la creación de metas de negocio.
-2. `PostgreSQL`: para la limpieza, transformación y modelado de transacciones.
-4. `Power BI`: para la creación de un dashboard que responda preguntas a la Dirección.
+
