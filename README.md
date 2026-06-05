@@ -10,6 +10,14 @@ En palabras sencillas, es crear un sistema de analítica inteligente que le perm
 2. `PostgreSQL`: para la limpieza, transformación y modelado de transacciones.
 3. `Power BI`: para la creación de un dashboard que responda preguntas a la Dirección.
 
+### Origen y Procedencia de los Datos (Data Sourcing)
+
+Los datos transaccionales de préstamos utilizados en este proyecto son de acceso público y han sido obtenidos de la plataforma `Kaggle`:
+
+* **Fuente del Dataset Principal:** [Kaggle - Credit Risk Dataset por Laotse](https://www.kaggle.com/datasets/laotse/credit-risk-dataset)
+* **Volumen de Datos:** 32,581 registros y 12 variables financieras y demográficas.
+* **Datos de Negocio Adicionales (Metas Financieras):** Adicionalmente, se integra un control de presupuestos mensuales simulado en **Google Sheets** para enriquecer el análisis comparativo del rendimiento del negocio en Power BI.
+
 ### Preguntas de Negocio a Responder
 
 **1. ¿Cuál es la Tasa de Morosidad (Bad Loan Ratio) y cuánto dinero está costando?**
