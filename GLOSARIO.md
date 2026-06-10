@@ -36,3 +36,32 @@
 * **Medidas Explícitas (Explicit Measures):** Métricas de negocio escritas manualmente en código DAX (ej. usando `SUM` o `CALCULATE`). Garantizan el control del rendimiento y la escalabilidad del reporte frente a las agregaciones automáticas.
 * **Time Intelligence (Inteligencia de Tiempo):** Funciones de DAX especializadas en realizar cálculos acumulativos y comparativos a lo largo del tiempo, como cálculos de mes a la fecha (*MTD*), año a la fecha (*YTD*), o variaciones mensuales (*MoM%*).
 * **Filtro Cross-Filtering (Filtrado Cruzado):** El comportamiento interactivo nativo en un reporte de Power BI donde al hacer clic en un elemento de un gráfico, automáticamente se segmentan y actualizan visualmente el resto de los elementos del dashboard.
+
+### Descripción de los campos  
+* **person_age**: Edad de la persona que solicita el préstamo.
+* **person_income**: Ingresos anuales de la persona.
+* **person_home_ownership**: Tipo de propiedad de la vivienda de la persona.
+    * **rent**: Actualmente, esta persona vive de alquiler.
+    * **mortgage**: Esta persona tiene una hipoteca sobre la vivienda de su propiedad.
+    * **own**: La persona es propietaria de su vivienda a título definitivo.
+    * **other**: Otras categorías de propiedad de la vivienda que puedan ser específicas del conjunto de datos.
+* **person_emp_length**: Antigüedad laboral de la persona en años.
+* **loan_intent**: El motivo de la solicitud de préstamo.
+* **loan_grade**: La calificación asignada al préstamo en función de la solvencia del prestatario.
+    * **A**: El prestatario tiene una alta solvencia, lo que indica un riesgo bajo.
+    * **B**: El prestatario presenta un riesgo relativamente bajo, pero no tiene la misma solvencia que los de grado A.
+    * **C**: La solvencia del prestatario es moderada.
+    * **D**: Se considera que el prestatario presenta un riesgo mayor en comparación con las categorías anteriores.
+    * **E**: La solvencia del prestatario es menor, lo que indica un mayor riesgo.
+    * **F**: El prestatario presenta un riesgo crediticio considerable.
+    * **G**: La solvencia del prestatario es la más baja, lo que implica el mayor riesgo.
+* **loan_amnt**: El importe del préstamo solicitado por la persona.
+* **loan_int_rate**: El tipo de interés asociado al préstamo.
+* **loan_status**: Estado del préstamo, donde 0 indica que no hay impago y 1 indica que hay impago.
+    * **0**: Non-default - El prestatario devolvió el préstamo sin problemas, tal y como se había acordado, y no se produjo ningún impago.
+    * **1**: Default - El prestatario no devolvió el préstamo según las condiciones acordadas y entró en mora.
+* **loan_percent_income**: El porcentaje de los ingresos que representa el importe del préstamo.
+* **cb_person_default_on_file**: Antecedentes de impagos del particular según los registros de las agencias de información crediticia.
+    * **Y**: Esta persona tiene antecedentes de impagos en su historial crediticio.
+    * **N**: Esta persona no tiene antecedentes de impagos.
+* **cb_preson_cred_hist_length**: La antigüedad del historial crediticio de la persona.
