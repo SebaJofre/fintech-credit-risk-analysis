@@ -38,6 +38,6 @@ Es importante dar respuesta a esta pregunta porque en finanzas, a mayor riesgo, 
 
 **5. ¿Cómo va el rendimiento del mes frente a las metas que se plantea la empresa?**
 
-Se cruzarn los datos reales con las metas mensuales para ver si se esta cumpliendo con el presupuesto de colocación sin disparar la morosidad
+Se cruzan los datos reales con las metas mensuales para ver si se esta cumpliendo con el presupuesto de colocación sin disparar la morosidad
 
 Para conocer en detalle los conceptos financieros y técnicos utilizados en este proyecto, consulta nuestro [Glosario de Términos (GLOSARIO.md)](./GLOSARIO.md).
