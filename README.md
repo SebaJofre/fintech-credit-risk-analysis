@@ -46,4 +46,10 @@ Para conocer en detalle los conceptos financieros y técnicos utilizados en este
 
 Se realiza un primer análisis en Excel para aplicar un proceso ETL (Extract, Transform and Loan) de los datos, que permita comprender la estructura de la base de datos y obtener respuestas concisas y de calidad.
 
-El archivo [Análisis en Excel](./MS%20EXCEL/credit_risk_dataset.xlsx)
+El archivo [credit_risk_dataset.xlsx](./MS%20EXCEL/credit_risk_dataset.xlsx) consta de 4 hojas:
+**1. credit_risk_dataset:** es la base de datos descargada, sin transformar.
+**2. About Dataset:** esta hoja contiene una tabla con la información de las columnas de la BD, que le permite al usuario realizar consultas.
+**3. Working Sheet:** Es la hoja contenedora de la BD, a la cual se le ha realizado un proceso ETL, para luego trabajar con la misma.
+**4. Working Analysis:** Hoja que contiene el análisis de datos financieros. La misma esta compuesta por tablas dinámicas, gráficos y cuadros de texto con la explicación e información secuencial del análisis realizado.
+
+
