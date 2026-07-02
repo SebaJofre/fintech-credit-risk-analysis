@@ -42,7 +42,7 @@ Se cruzan los datos reales con las metas mensuales para ver si se esta cumpliend
 
 Para conocer en detalle los conceptos financieros y técnicos utilizados en este proyecto, consulta nuestro [Glosario de Términos (GLOSARIO.md)](./GLOSARIO.md).
 
-### Analísis de Datos en Microsoft Excel
+### Análisis de Datos en Microsoft Excel
 
 Se realiza un primer análisis en Excel para aplicar un proceso ETL (Extract, Transform and Loan) de los datos, que permita comprender la estructura de la base de datos y obtener respuestas concisas y de calidad.
 
@@ -56,4 +56,22 @@ El archivo [credit_risk_dataset.xlsx](./MS%20EXCEL/credit_risk_dataset.xlsx) con
 
 **4. Working Analysis:** Hoja que contiene el análisis de datos financieros. La misma esta compuesta por tablas dinámicas, gráficos y cuadros de texto con la explicación e información secuencial del análisis realizado.
 
+## Análisis en Python
+
+```python
+import pandas as pd
+# 1. Leemos el archivo csv y lo guardamos en una variable llamada df (DateFrame)
+df = pd.read_csv('credit_risk_dataset.csv')
+
+# 2. Se muestras las primeras 5 filas para ver la estructura de la base de datos
+df.head()
+```
+
+Luego, determinamos cuántos valores nulos tiene cada columna de la base de datos
+
+```python
+
+df.isnull().sum()
+```
+<img width="292" height="253" alt="image" src="https://github.com/user-attachments/assets/7ab235a8-0efe-4579-80b0-1f2437729126" />
 
