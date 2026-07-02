@@ -67,7 +67,7 @@ df = pd.read_csv('credit_risk_dataset.csv')
 df.head()
 ```
 
-Luego, determinamos cuántos valores nulos tiene cada columna de la base de datos
+Luego, determinamos cuántos valores nulos tiene cada columna de la base de datos:
 
 ```python
 
@@ -75,3 +75,9 @@ df.isnull().sum()
 ```
 <img width="292" height="253" alt="image" src="https://github.com/user-attachments/assets/7ab235a8-0efe-4579-80b0-1f2437729126" />
 
+Usamos la función estadística de Pandas para determinar valores atípicos que pueden causar ruido en nuestros análisis.
+
+```python
+df.describe()
+```
+<img width="1079" height="263" alt="image" src="https://github.com/user-attachments/assets/0b4674b7-9e14-4f67-88fc-99f0bfdf3004" />
