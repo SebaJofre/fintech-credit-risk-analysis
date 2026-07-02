@@ -46,4 +46,4 @@ Para conocer en detalle los conceptos financieros y técnicos utilizados en este
 
 Se realiza un primer análisis en Excel para aplicar un proceso ETL (Extract, Transform and Loan) de los datos, que permita comprender la estructura de la base de datos y obtener respuestas concisas y de calidad.
 
-El archivo [Análisis_en_Excel](./MS EXCEL/credit_risk_dataset_xlsx)
+El archivo [Análisis en Excel](./MS%20EXCEL/credit_risk_dataset.xlsx)
