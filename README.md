@@ -6,7 +6,7 @@ Se busca realizar un análisis que permita determinar qué segmentos es el más 
 En palabras sencillas, es crear un sistema de analítica inteligente que le permita a la empresa seguir prestando dinero para crecer, pero bloqueando o evitando automáticamente a los clientes que tienen una alta probabilidad de no pagar, ahorrando millones en pérdidas.
 
 ### Herramientas a utilizar:
-1. `Microsoft Excel`: para la creación de metas de negocio.
+1. `Microsoft Excel`: prototipado y análisis de riesgo.
 2. `PostgreSQL`: para la limpieza, transformación y modelado de transacciones.
 3. `Power BI`: para la creación de un dashboard que responda preguntas a la Dirección.
 
@@ -16,7 +16,7 @@ Los datos transaccionales de préstamos utilizados en este proyecto son de acces
 
 * **Fuente del Dataset Principal:** [Kaggle - Credit Risk Dataset por Laotse](https://www.kaggle.com/datasets/laotse/credit-risk-dataset)
 * **Volumen de Datos:** 32,581 registros y 12 variables financieras y demográficas.
-* **Datos de Negocio Adicionales (Metas Financieras):** Adicionalmente, se integra un control de presupuestos mensuales simulado en **Google Sheets** para enriquecer el análisis comparativo del rendimiento del negocio en Power BI.
+* **Datos de Negocio Adicionales (Metas Financieras):** Adicionalmente, se integra un control de presupuestos mensuales simulado en **Microsoft Excel** para enriquecer el análisis comparativo del rendimiento del negocio en Power BI.
 
 ### Preguntas de Negocio a Responder
 
