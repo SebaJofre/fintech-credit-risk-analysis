@@ -20,6 +20,11 @@ En esta primera etapa en Jupyter Notebook, realicé una auditoría del archivo c
 ### 2. Estrategia de Limpieza de Datos (Pasos 2 y 3)
 Para no dañar la integridad del negocio eliminando registros valiosos, apliqué las siguientes reglas de ingeniería de datos:
 
-1. **Remoción de Errores Fácticos:** Se filtraron y eliminaron por completo las 7 filas que contenían edades > 100 años o antigüedad > 60 años.
+ 1. **Remoción de Errores Fácticos:** Se filtraron y eliminaron por completo las 7 filas que contenían edades > 100 años o antigüedad > 60 años.
+ 2. **Imputación de Antigüedad (`person_emp_length`):** Se rellenaron los vacíos utilizando la mediana general de la columna (4.0 años) para evitar distorsiones por valores extremos.
+ 3. **Imputación avanzada de Tasas de Interés (`loan_int_rate`):** Al ser un procentaje alto (9,56%) se aplicó una imputación agrupada por categoría de riesgo (`loan_grade`). Cada celda vacía se rellenó con el promedio exacto de tasa correspondiente a su nivel de riesgo asignado.
 
- 2. **Imputación de Antigüedad (`person_emp_length`):**
+**Resultado Final**: Un Dataset de 32.574 registros con 0 valores nulos, exportado como `credit_risk_dataset.csv`.
+
+*Próximo paso en desarrollo: Creación del modelo relacional y carga de datos en PostgreSQL (Paso 3).*
+
