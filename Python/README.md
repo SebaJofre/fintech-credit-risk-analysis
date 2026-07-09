@@ -17,4 +17,9 @@ En esta primera etapa en Jupyter Notebook, realicé una auditoría del archivo c
   * `person_age`: Se detectaron valores absurdos de 144 años.
   * `person_emp_lenght`: Se detectaron valores absurdos de 123 años.
 
+### 2. Estrategia de Limpieza de Datos (Pasos 2 y 3)
+Para no dañar la integridad del negocio eliminando registros valiosos, apliqué las siguientes reglas de ingeniería de datos:
 
+1. **Remoción de Errores Fácticos:** Se filtraron y eliminaron por completo las 7 filas que contenían edades > 100 años o antigüedad > 60 años.
+
+ 2. **Imputación de Antigüedad (`person_emp_length`):**
