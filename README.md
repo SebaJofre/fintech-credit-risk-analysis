@@ -1,19 +1,23 @@
 # Análisis de Riesgo Crediticio de una FinTech
 
-### Objetivo del Proyecto.
+## Objetivo del Proyecto.
 Determinar los segmentos tomadores de préstamos que representan mayores riesgos para la compañía.
 
 Se busca realizar un análisis que permita determinar qué segmentos es el más propenso a no pagar los créditos. Esto permitirá denegarles prestamos a aquellos segmentos específicos.
 
 En palabras sencillas, es crear un sistema de analítica inteligente que le permita a la empresa seguir prestando dinero para crecer, pero bloqueando o evitando automáticamente a los clientes que tienen una alta probabilidad de no pagar, ahorrando millones en pérdidas.
 
-### Herramientas a utilizar:
+---
+
+## Herramientas a utilizar:
 1. `Microsoft Excel`: Utilizado para el prototipado rápido, limpieza manual inicial y validación de hipótesis de negocio mediante tablas dinámicas y fórmulas.
 2. `Python (Pandas)`: El motor de automatización para la auditoría inicial del dataset y la aplicación de algoritmos de imputación de datos faltantes.
 3. `PostgreSQL`: La base de datos relacional encargada de estructurar los datos limpios bajo un esquema sólido, optimizar consultas pesadas y almacenar vistas lógicas de negocio.
 4. `Power BI`: La herramienta de Business Intelligence para conectar la base de datos de PostgreSQL y diseñar el dashboard de control para la toma de decisiones directivas.
 
-### Origen y Procedencia de los Datos (Data Sourcing)
+---
+
+## Origen y Procedencia de los Datos (Data Sourcing)
 
 Los datos transaccionales de préstamos utilizados en este proyecto son de acceso público y han sido obtenidos de la plataforma `Kaggle`:
 
@@ -21,7 +25,9 @@ Los datos transaccionales de préstamos utilizados en este proyecto son de acces
 * **Volumen de Datos:** 32,581 registros y 12 variables financieras y demográficas.
 * **Datos de Negocio Adicionales (Metas Financieras):** Adicionalmente, se integra un control de presupuestos mensuales simulado en **Microsoft Excel** para enriquecer el análisis comparativo del rendimiento del negocio en Power BI.
 
-### Preguntas de Negocio a Responder
+---
+
+## Preguntas de Negocio a Responder
 
 **1. ¿Cuál es la Tasa de Morosidad (Bad Loan Ratio) y cuánto dinero está costando?**
    
@@ -43,9 +49,11 @@ Es importante dar respuesta a esta pregunta porque en finanzas, a mayor riesgo, 
 
 Se cruzan los datos reales con las metas mensuales para ver si se esta cumpliendo con el presupuesto de colocación sin disparar la morosidad
 
-Para conocer en detalle los conceptos financieros y técnicos utilizados en este proyecto, consulta nuestro [Glosario de Términos (GLOSARIO.md)](./GLOSARIO.md).
+Para conocer en detalle los conceptos financieros y técnicos utilizados en este proyecto, consulta el [Glosario de Términos (GLOSARIO.md)](./GLOSARIO.md).
 
-### Análisis de Datos en Microsoft Excel
+---
+
+## Análisis de Datos en Microsoft Excel
 
 Se realiza un primer análisis en Excel para aplicar un proceso ETL (Extract, Transform and Loan) de los datos, que permita comprender la estructura de la base de datos y obtener respuestas concisas y de calidad.
 
@@ -59,28 +67,29 @@ El archivo [credit_risk_dataset.xlsx](./MS%20EXCEL/credit_risk_dataset.xlsx) con
 
 **4. Working Analysis:** Hoja que contiene el análisis de datos financieros. La misma esta compuesta por tablas dinámicas, gráficos y cuadros de texto con la explicación e información secuencial del análisis realizado.
 
+---
+
 ## Análisis en Python
 
-```python
-import pandas as pd
-# 1. Leemos el archivo csv y lo guardamos en una variable llamada df (DateFrame)
-df = pd.read_csv('credit_risk_dataset.csv')
+En esta etapa de desarrollo, se utilizó **Python (Pandas & Jupyter Notebooks)** para diseñar un proceso automatizado y reproducible de auditoría, diagnóstico y limpieza pesada sobre el dataset original. El objetivo principal fue garantizar la calidad y la integridad física de los datos antes de su almacenamiento relacional.
 
-# 2. Se muestras las primeras 5 filas para ver la estructura de la base de datos
-df.head()
-```
+El contenido detallado de esta fase se encuentra en [Python/README.md](./Python/README.md) y consta de:
 
-Luego, determinamos cuántos valores nulos tiene cada columna de la base de datos:
+* **1_exploracion_y_limpieza.ipynb:** Cuaderno de Jupyter donde se documenta el flujo de ingeniería de datos:
+  * **Auditoría de Calidad:** Diagnóstico preliminar que detectó valores nulos críticos y datos físicamente imposibles (valores atípicos como una edad de 144 años o una antigüedad laboral de 123 años).
+  * **Imputación de Datos:** Sustitución metodológica de valores nulos mediante el uso de la mediana para la antigüedad y el promedio agrupado por calificación de riesgo (`loan_grade`) para las tasas de interés.
+  * **Exportación de Producción:** Generación del archivo unificado `credit_risk_dataset_clean.csv`, 100% libre de nulos y atípicos, listo para producción.
 
-```python
+---
 
-df.isnull().sum()
-```
-<img width="292" height="253" alt="image" src="https://github.com/user-attachments/assets/7ab235a8-0efe-4579-80b0-1f2437729126" />
+## Modelado y Análisis Estadístico en PostgreSQL
 
-Usamos la función estadística de Pandas para determinar valores atípicos que pueden causar ruido en nuestros análisis.
+Una vez depurada la información, se migró el pipeline a **PostgreSQL** para simular la arquitectura de datos relacional que utilizaría la FinTech en un entorno real. En esta fase, el enfoque cambió de la limpieza algorítmica al modelado estructurado de base de datos y la optimización de consultas estadísticas a gran escala.
 
-```python
-df.describe()
-```
-<img width="1079" height="263" alt="image" src="https://github.com/user-attachments/assets/0b4674b7-9e14-4f67-88fc-99f0bfdf3004" />
+El contenido detallado de esta fase se encuentra en [PostgreSQL/README.md](./PostgreSQL/README.md) y abarca:
+
+* **Esquema de Producción:** Creación de la tabla física `credits` con restricciones de integridad, asignación de llaves primarias (`PRIMARY KEY` autogeneradas mediante `SERIAL`) y definición precisa de tipos de datos financieros (como `DECIMAL` para cálculos exactos de tasas e ingresos).
+* **Vistas de Negocio (`VIEW`):** Creación de vistas lógicas parametrizadas (como `v_credits_age_groups`) para simplificar el acceso a datos segmentados por rango etario sin duplicar información en disco.
+* **Consultas de Control e Indicadores:** Desarrollo de scripts de análisis avanzado en SQL para calcular de forma agregada las tasas de morosidad global, volúmenes de impago y cruce analítico de perfiles de riesgo mediante funciones de agregación y agrupamientos eficientes.
+
+---
