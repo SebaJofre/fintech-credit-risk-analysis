@@ -2,13 +2,16 @@
 
 ### Objetivo del Proyecto.
 Determinar los segmentos tomadores de préstamos que representan mayores riesgos para la compañía.
+
 Se busca realizar un análisis que permita determinar qué segmentos es el más propenso a no pagar los créditos. Esto permitirá denegarles prestamos a aquellos segmentos específicos.
+
 En palabras sencillas, es crear un sistema de analítica inteligente que le permita a la empresa seguir prestando dinero para crecer, pero bloqueando o evitando automáticamente a los clientes que tienen una alta probabilidad de no pagar, ahorrando millones en pérdidas.
 
 ### Herramientas a utilizar:
-1. `Microsoft Excel`: prototipado y análisis de riesgo.
-2. `PostgreSQL`: para la limpieza, transformación y modelado de transacciones.
-3. `Power BI`: para la creación de un dashboard que responda preguntas a la Dirección.
+1. `Microsoft Excel`: Utilizado para el prototipado rápido, limpieza manual inicial y validación de hipótesis de negocio mediante tablas dinámicas y fórmulas.
+2. `Python (Pandas)`: El motor de automatización para la auditoría inicial del dataset y la aplicación de algoritmos de imputación de datos faltantes.
+3. `PostgreSQL`: La base de datos relacional encargada de estructurar los datos limpios bajo un esquema sólido, optimizar consultas pesadas y almacenar vistas lógicas de negocio.
+4. `Power BI`: La herramienta de Business Intelligence para conectar la base de datos de PostgreSQL y diseñar el dashboard de control para la toma de decisiones directivas.
 
 ### Origen y Procedencia de los Datos (Data Sourcing)
 
