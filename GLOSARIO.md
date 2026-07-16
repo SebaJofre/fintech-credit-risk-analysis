@@ -37,7 +37,9 @@
 * **Time Intelligence (Inteligencia de Tiempo):** Funciones de DAX especializadas en realizar cálculos acumulativos y comparativos a lo largo del tiempo, como cálculos de mes a la fecha (*MTD*), año a la fecha (*YTD*), o variaciones mensuales (*MoM%*).
 * **Filtro Cross-Filtering (Filtrado Cruzado):** El comportamiento interactivo nativo en un reporte de Power BI donde al hacer clic en un elemento de un gráfico, automáticamente se segmentan y actualizan visualmente el resto de los elementos del dashboard.
 
-### Descripción de los campos  
+---
+
+## Descripción de los campos  
 * **person_age**: Edad de la persona que solicita el préstamo.
 * **person_income**: Ingresos anuales de la persona.
 * **person_home_ownership**: Tipo de propiedad de la vivienda de la persona.
