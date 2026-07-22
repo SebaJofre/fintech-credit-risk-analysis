@@ -51,3 +51,13 @@ SELECT *
 FROM credits
 LIMIT 5;
 ```
+---
+
+## 2. Respuestas a las Preguntas de Negocio
+
+> 📂 **Código fuente completo:** Puedes consultar el script con las Preguntas de Negocio en [02_preguntas_de_negocio.sql](./02_preguntas_de_negocio.sql).
+
+### 1. ¿Cuál es la Tasa de Morosidad (Bad Loan Ratio) y cuánto dinero está costando?
+#### Objetivo del Negocio
+Evaluar la salud financiera general de la cartera de créditos para determinar si la empresa se encuentra por encima del límite de peligro aceptable (establecido internamente en un máximo de 5% de pérdidas) y cuantificar el impacto monetario exacto en millones de dólares de los préstamos en mora.
+
