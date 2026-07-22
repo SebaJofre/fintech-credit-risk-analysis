@@ -61,3 +61,39 @@ LIMIT 5;
 #### Objetivo del Negocio
 Evaluar la salud financiera general de la cartera de créditos para determinar si la empresa se encuentra por encima del límite de peligro aceptable (establecido internamente en un máximo de 5% de pérdidas) y cuantificar el impacto monetario exacto en millones de dólares de los préstamos en mora.
 
+#### Consulta SQL
+Para resolver esta pregunta, se utilizaron funciones de agregación condicionales (CASE WHEN) combinadas con conversiones de tipo (::DECIMAL) y redondos (ROUND) para calcular tanto el volumen de capital expuesto como los porcentajes de morosidad global.
+```sql
+SELECT 
+	-- 1. Cuánto dinero representan los préstamos en mora (en millones)
+	ROUND(SUM(CASE WHEN loan_status = 1 THEN loan_amnt ELSE 0 END) / 1000000.0,2) AS dinero_en_mora_millones,
+
+	-- 2. Monto total prestado en la cartera (en millones)
+	ROUND(SUM(loan_amnt)/1000000.0,2) AS total_prestado_millones,
+
+	-- 3. Tasa de Morosidad por monto (Bad Loan Ratio en %)
+	ROUND((SUM(CASE WHEN loan_status = 1 THEN loan_amnt ELSE 0 END)::DECIMAL / SUM(loan_amnt)) * 100,2) AS tasa_morosidad_monto,
+
+	-- 4. Tasa de Morosidad por cantidad de créditos (en %)
+	ROUND((SUM(loan_status)::DECIMAL / COUNT(*)) * 100,2) AS tasa_morosidad_cantidad
+FROM credits;
+```
+#### Resultados Obtenidos
+| Métrica / Variable | Resultado Obtenido | Diagnóstico & Impacto de Negocio |
+| :--- | :--- | :--- |
+| **Cartera Total Contratada** | **$312.32M USD** | Volumen total de capital originado en el portafolio analizado. |
+| **Capital en Mora** | **$77.09M USD** | Capital expuesto a pérdida directa por impago (`loan_status = 1`). |
+| **Tasa de Morosidad (por Monto)** | **24.68%** | **CRÍTICO:** Excede ampliamente el umbral de tolerancia habitual (3% - 5%). |
+| **Tasa de Morosidad (por Cantidad)** | **21.82%** | **CRÍTICO:** Aproximadamente 1 de cada 5 clientes entra en mora. |
+| **Monto vs. Cantidad** | **24.68% > 21.82%** | Los créditos que caen en mora corresponden, en promedio, a montos más elevados (*high ticket*). |
+
+#### Análisis e Impacto de Negocio
+
+1. **Exceeding Risk Limits (Superación del Límite de Peligro):**
+Con una tasa de morosidad del 24.68%, la FinTech opera en una zona de riesgo crítico. El indicador supera por casi cinco veces el umbral máximo tolerable de la industria (5%), lo que evidencia fallas graves en las políticas vigentes de originación y evaluación de riesgo.
+
+2. **Impacto Monetario Directo:**
+Existen $77.09 millones de dólares inmovilizados o en inminente riesgo de pérdida total. Esto afecta de manera directa la liquidez de la compañía y exige constituir provisiones de capital extraordinarias.
+
+3. **Discrepancia entre Monto y Cantidad:**
+La tasa de morosidad calculada por monto (24.68%) es superior a la calculada por número de operaciones (21.82%). Este hallazgo demuestra que los créditos que caen en mora son, en promedio, de montos más elevados (high ticket), por lo que el impacto financiero recae fuertemente en las operaciones grandes.
