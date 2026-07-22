@@ -45,10 +45,6 @@ Se analizará el propósito del préstamos (loan intent). Por ejemplo: Si se det
 
 Es importante dar respuesta a esta pregunta porque en finanzas, a mayor riesgo, mayor tase de interés. Se debe comprobar que si la FinTech le está cobrando una tasa más alta a los clientes con peor historial, o si se esta cometiendo el error de cobrarle lo mismo a todos.
 
-**5. ¿Cómo va el rendimiento del mes frente a las metas que se plantea la empresa?**
-
-Se cruzan los datos reales con las metas mensuales para ver si se esta cumpliendo con el presupuesto de colocación sin disparar la morosidad
-
 Para conocer en detalle los conceptos financieros y técnicos utilizados en este proyecto, consulta el [Glosario de Términos (GLOSARIO.md)](./GLOSARIO.md).
 
 ---
