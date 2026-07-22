@@ -27,3 +27,25 @@ CREATE TABLE credits (
 	cb_person_cred_hist_length INT		-- Años de historial crediticio registrado
 );
 ```
+### Importación del Dataset
+Una vez estructurada la tabla, se realizó el proceso de carga de datos (ETL) desde el archivo CSV limpio (`credit_risk_dataset.csv`) usando el comando nativo `COPY` de PostgreSQL (o la interfaz de importación de pgAdmin):
+```sql
+-- 3. Ejemplo de carga masiva vía SQL nativo
+
+COPY credits 
+FROM '/ruta/del/archivo/credit_risk_dataset.csv' 
+DELIMITER ',' 
+CSV HEADER;
+```
+### Verificación inicial de carga
+Para comprobar que la estructura se importó correctamente y que los tipos de datos concuerdan con la muestra del dataset:
+```sql
+-- 4. Confirmar cantidad total de registros importados
+SELECT COUNT(*) AS total_registros
+FROM credits;
+
+-- 5. Inspeccionar las primeras filas de la tabla
+SELECT *
+FROM credits
+LIMIT 5;
+```
