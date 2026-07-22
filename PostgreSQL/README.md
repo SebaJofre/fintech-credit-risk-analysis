@@ -3,7 +3,7 @@
 ## 1. Configuración de la Base de Datos e Importación de Datos
 El primer paso consistió en preparar el entorno relacional dentro de PostgreSQL. Se creó la base de datos `fintech` y la tabla `credits` estructurada con los tipos de datos adecuados para soportar el volumen de información y garantizar la precisión en los cálculos numéricos.
 
-📂 Código fuente completo: Puedes consultar el script con la creación de la base de datos y tabla en PostgreSQL/01_schema_and_import.sql
+> 📂 **Código fuente completo:** Puedes consultar el script con la creación de la base de datos y tabla en [01_schema_and_import.sql](./01_schema_and_import.sql).
 
 ### Script de Creación de la Base de Datos y Esquema
 
