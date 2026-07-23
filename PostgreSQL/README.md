@@ -207,3 +207,69 @@ Los préstamos para Emprendimiento / Negocios (17.42%) y Educación (18.15%) pre
 1. **Ajuste en Consolidación y Salud:** Aplicar políticas de scoring más estrictas o requerir verificación de capacidad de pago asistida para solicitudes de DEBTCONSOLIDATION y MEDICAL.
 
 2. **Incentivos a Proyectos Productivos:** Fomentar y priorizar la colocación de créditos para VENTURE y EDUCATION, ya que sostienen una cartera más sana e impulsan el crecimiento del cliente.
+
+### 4. ¿Se está cobrando el interés correcto según el riesgo del cliente?
+
+#### Objetivo de Negocio
+Evaluar la política de fijación de precios basada en riesgo (*Risk-Based Pricing*). Se busca comprobar si la tasa de interés compensa adecuadamente el riesgo asumido, tanto a nivel de antecedentes en buró (`cb_person_default_on_file`) como en las calificaciones internas de riesgo (`loan_grade`).
+---
+
+#### Consultas SQL
+
+#### Consulta A: Análisis por Historial Crediticio Previo
+```sql
+SELECT 
+    cb_person_default_on_file AS historial_crediticio,
+    COUNT(*) AS total_clientes,
+    ROUND(AVG(loan_int_rate), 2) AS tasa_interes_promedio,
+    ROUND((SUM(CASE WHEN loan_status = 1 THEN loan_amnt ELSE 0 END)::DECIMAL / SUM(loan_amnt)) * 100, 2) AS tasa_morosidad_monto
+FROM credits
+GROUP BY historial_crediticio
+ORDER BY tasa_morosidad_monto DESC;
+```
+#### Consulta B: Análisis por Calificación Interna de Riesgo (loan_grade)
+```sql
+SELECT 
+    loan_grade AS calificacion_credito,
+    COUNT(*) AS total_clientes,
+    ROUND(AVG(loan_int_rate), 2) AS tasa_interes_promedio,
+    ROUND((SUM(CASE WHEN loan_status = 1 THEN loan_amnt ELSE 0 END)::DECIMAL / SUM(loan_amnt)) * 100, 2) AS tasa_morosidad_monto
+FROM credits
+GROUP BY calificacion_credito
+ORDER BY loan_grade ASC;
+```
+#### Resultados Obtenidos
+Tabla A: Según Historial en Buró (Y = Antecedente de mora / N = Sin antecedente)
+| historial_crediticio | total_clientes | tasa_interes_promedio | tasa_morosidad_monto |
+| :--- | :--- | :--- | :--- |
+| **Y** | 5,744 | **14.51%** | **40.68%** |
+| **N** | 26,830 | **10.26%** | **21.03%** |
+
+Tabla B: Según Calificación Interna de Riesgo (loan_grade)
+| calificacion_credito | total_clientes | tasa_interes_promedio | tasa_morosidad_monto |
+| :--- | :--- | :--- | :--- |
+| **A** | 10,776 | **7.33%** | **11.09%** |
+| **B** | 10,448 | **11.00%** | **18.31%** |
+| **C** | 6,456 | **13.46%** | **22.83%** |
+| **D** | 3,625 | **15.36%** | **57.92%** |
+| **E** | 964 | **17.01%** | **62.86%** |
+| **F** | 241 | **18.61%** | **70.40%** |
+| **G** | 64 | **20.25%** | **99.85%** |
+
+#### Análisis e Impacto de Negocio
+1. **Ajuste por Antecedente en Buró (Tabla A):**
+
+Existe una penalización tarifaria activa para clientes con mal historial en el buró: se les aplica una tasa promedio del 14.51% frente al 10.26% de los clientes sin antecedentes (spread de ~4.25%). Sin embargo, la morosidad de este segmento se dispara al 40.68% (casi el doble), lo que demuestra que el incremento de tasa actual no llega a cubrir el riesgo real de impago.
+
+2. **Quiebre de Rentabilidad en Notas D-G (Tabla B):**
+
+Aunque el algoritmo ajusta gradualmente la tasa de interés por categoría (de 7.33% en A a 20.25% en G), el incremento en la tasa no compensa la explosión en la tasa de mora:
+
+En la nota D, la mora da un salto dramático al 57.92% con un interés cobrado de apenas 15.36%.
+
+En la nota G, prácticamente la totalidad del capital prestado se pierde (99.85% de morosidad), convirtiendo la colocación en estos segmentos en un déficit directo.
+
+#### Recomendación Estratégica
+1. **Mayor Recargo por Buró (Y):** Aumentar el diferencial de tasa o Endurecer la capacidad crediticia (cap de monto) para clientes con antecedentes en el buró, dado que una mora del 40% requiere un margen mayor para no generar pérdidas.
+
+2. **Corte de Originación (Cut-off) en Grados Críticos:** Desactivar la aprobación automática para los créditos con calificación D, E, F y G, o exigir garantías reales. La prima de riesgo requerida para cubrir una mora superior al 55% invalida la viabilidad financiera bajo las tasas actuales.
