@@ -274,3 +274,14 @@ En la nota G, prácticamente la totalidad del capital prestado se pierde (99.85%
 
 2. **Corte de Originación (Cut-off) en Grados Críticos:** Desactivar la aprobación automática para los créditos con calificación D, E, F y G, o exigir garantías reales. La prima de riesgo requerida para cubrir una mora superior al 55% invalida la viabilidad financiera bajo las tasas actuales.
 ---
+
+## Conclusiones Generales del Análisis en PostgreSQL
+
+El análisis exploratorio de datos (*EDA*) y las consultas ejecutadas sobre la base de datos `fintech_credit_risk` permitieron identificar las principales vulnerabilidades en la gestión del riesgo crediticio de la compañía:
+
+1. **Riesgo Crítico Global:** La tasa de morosidad global alcanza un **24.68% por monto**, representando más de **$77M USD en riesgo**. Este valor supera ampliamente el límite operativo estándar de la industria (5%).
+2. **Perfil de Alto Riesgo:** Los clientes en situación de **alquiler (`RENT`) con ingresos bajos (< $30k USD)** presentan una tasa de morosidad extrema del **63.27%**. Por el contrario, los propietarios (`OWN`) mantienen tasas de mora por debajo del **3%**, consolidándose como el segmento más seguro.
+3. **Propósito del Crédito:** Los préstamos destinados a **Consolidación de Deuda (`DEBTCONSOLIDATION`)** y **Gastos Médicos (`MEDICAL`)** concentran la mayor tasa de incobrabilidad (~28-29%), reflejando que los clientes que financian contingencias o deudas previas tienen menor capacidad de recupero.
+4. **Ineficiencia en la Fijación de Precios (*Pricing*):** La tasa de interés cobrada en las calificaciones internas de mayor riesgo (**D, E, F y G**, con tasas de mora del 57% al 99%) resulta totalmente insuficiente para compensar las pérdidas de capital generadas.
+
+---
