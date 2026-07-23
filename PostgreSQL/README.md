@@ -285,3 +285,4 @@ El análisis exploratorio de datos (*EDA*) y las consultas ejecutadas sobre la b
 4. **Ineficiencia en la Fijación de Precios (*Pricing*):** La tasa de interés cobrada en las calificaciones internas de mayor riesgo (**D, E, F y G**, con tasas de mora del 57% al 99%) resulta totalmente insuficiente para compensar las pérdidas de capital generadas.
 
 ---
+*Nota: Se deja un archivo con consultas de práctica [03_queries_practice.sql](./03_queries_practice.sql)
