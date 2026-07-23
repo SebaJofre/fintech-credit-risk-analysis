@@ -168,7 +168,7 @@ Tener vivienda propia demuestra ser el mayor factor de mitigación de riesgo. In
 
 Analizar el propósito del préstamo (`loan_intent`) para determinar si existen destinos con una probabilidad de impago significativamente superior que justifiquen restringir líneas de crédito o aplicar sobretasas por tipo de uso.
 
-### Consulta SQL
+#### Consulta SQL
 
 Se agruparon todas las operaciones por el propósito del crédito (`loan_intent`), calculando el volumen total prestado, el monto en mora y la tasa de morosidad ponderada por capital para cada categoría.
 
