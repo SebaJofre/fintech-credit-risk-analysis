@@ -84,7 +84,7 @@ Una vez depurada la información, se migró el pipeline a **PostgreSQL** para si
 El contenido detallado de esta fase se encuentra en [PostgreSQL/README.md](./PostgreSQL/README.md) y abarca:
 
 * **Esquema de Producción:** Creación de la tabla física `credits` con restricciones de integridad, asignación de llaves primarias (`PRIMARY KEY` autogeneradas mediante `SERIAL`) y definición precisa de tipos de datos financieros (como `DECIMAL` para cálculos exactos de tasas e ingresos).
-* **Vistas de Negocio (`VIEW`):** Creación de vistas lógicas parametrizadas (como `v_credits_age_groups`) para simplificar el acceso a datos segmentados por rango etario sin duplicar información en disco.
+* **Vistas de Negocio (`VIEW`):** Creación de vistas lógicas parametrizadas para simplificar el acceso a datos segmentados por rango etario sin duplicar información en disco.
 * **Consultas de Control e Indicadores:** Desarrollo de scripts de análisis avanzado en SQL para calcular de forma agregada las tasas de morosidad global, volúmenes de impago y cruce analítico de perfiles de riesgo mediante funciones de agregación y agrupamientos eficientes.
 
 ---
