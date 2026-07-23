@@ -97,3 +97,43 @@ Existen $77.09 millones de dólares inmovilizados o en inminente riesgo de pérd
 
 3. **Discrepancia entre Monto y Cantidad:**
 La tasa de morosidad calculada por monto (24.68%) es superior a la calculada por número de operaciones (21.82%). Este hallazgo demuestra que los créditos que caen en mora son, en promedio, de montos más elevados (high ticket), por lo que el impacto financiero recae fuertemente en las operaciones grandes.
+
+### 2. ¿Qué perfil de cliente es el más peligroso para la empresa?
+Identificar qué combinación de variables socioeconómicas (tipo de vivienda y rango de ingresos anuales) incrementa drásticamente la tasa de mora para proponer modificaciones inmediatas en los filtros de aprobación automática (*hard filters*).
+
+#### Consulta SQL
+```sql
+SELECT person_home_ownership AS tipo_de_vivienda,
+		CASE 
+			WHEN person_income < 30000 THEN 'Ingreso Bajo'
+			WHEN person_income > 70000 THEN 'Ingreso Alto'
+			ELSE 'Ingreso Medio' 
+		END AS ingresos,
+		COUNT(*) AS total_clientes,
+		(SUM(CASE WHEN loan_status = 1 THEN 1 ELSE 0 END)) AS cantidad_morosos,
+		ROUND((SUM(CASE WHEN loan_status = 1 THEN loan_amnt ELSE 0 END)::DECIMAL / SUM(loan_amnt)) * 100,2) AS tasa_morosidad_monto
+FROM credits
+GROUP BY tipo_de_vivienda, ingresos
+ORDER BY tasa_morosidad_monto DESC;
+```
+#### Resultados Obtenidos (Top Segmentos de Riesgo)
+| Tipo de Vivienda | Rango de Ingresos | Diagnóstico & Impacto de Negocio |
+| :--- | :--- | :--- |
+
+#### Análisis e Impacto de Negocio
+El Perfil de Mayor Peligro (RENT + Ingreso Bajo):
+
+Los solicitantes que alquilan vivienda e ingresan menos de $30,000 USD/año registran una tasa de mora del 63.27%. Más de 6 de cada 10 dólares prestados a este segmento resultan impagados.
+
+Volumen vs. Concentración de Riesgo (RENT + Ingreso Medio):
+
+El grupo de alquiler con ingreso medio representa el segmento más grande de la base (10,346 clientes). Sin embargo, presenta una tasa de mora críticamente alta del 42.43% (3,220 morosos), convirtiéndose en la fuente principal de volumen de pérdidas en dinero.
+
+El Factor Protector de la Vivienda Propia (OWN):
+
+Tener vivienda propia demuestra ser el mayor factor de mitigación de riesgo. Incluso en niveles de ingreso medio, los propietarios muestran una tasa de impago de apenas 2.31%, situándose holgadamente por debajo del umbral de peligro del 5%.
+
+#### Recomendación Estratégica
+Filtro Estricto para Alquiler/Bajo Ingreso: Bloquear la aprobación automática para la combinación RENT + Ingreso Bajo o exigir un aval/garantía sólida.
+
+Incentivos para Propietarios: Aumentar la tasa de aprobación y ofrecer mejores condiciones a clientes con vivienda propia (OWN), ya que su comportamiento de pago es excepcionalmente estable.
