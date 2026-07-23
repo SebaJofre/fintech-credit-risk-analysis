@@ -23,7 +23,6 @@ Los datos transaccionales de préstamos utilizados en este proyecto son de acces
 
 * **Fuente del Dataset Principal:** [Kaggle - Credit Risk Dataset por Laotse](https://www.kaggle.com/datasets/laotse/credit-risk-dataset)
 * **Volumen de Datos:** 32,581 registros y 12 variables financieras y demográficas.
-* **Datos de Negocio Adicionales (Metas Financieras):** Adicionalmente, se integra un control de presupuestos mensuales simulado en **Microsoft Excel** para enriquecer el análisis comparativo del rendimiento del negocio en Power BI.
 
 ---
 
