@@ -58,11 +58,15 @@ LIMIT 5;
 > 📂 **Código fuente completo:** Puedes consultar el script con las Preguntas de Negocio en [02_preguntas_de_negocio.sql](./02_preguntas_de_negocio.sql).
 
 ### 1. ¿Cuál es la Tasa de Morosidad (Bad Loan Ratio) y cuánto dinero está costando?
+
 #### Objetivo del Negocio
+
 Evaluar la salud financiera general de la cartera de créditos para determinar si la empresa se encuentra por encima del límite de peligro aceptable (establecido internamente en un máximo de 5% de pérdidas) y cuantificar el impacto monetario exacto en millones de dólares de los préstamos en mora.
 
 #### Consulta SQL
+
 Para resolver esta pregunta, se utilizaron funciones de agregación condicionales (CASE WHEN) combinadas con conversiones de tipo (::DECIMAL) y redondos (ROUND) para calcular tanto el volumen de capital expuesto como los porcentajes de morosidad global.
+
 ```sql
 SELECT 
 	-- 1. Cuánto dinero representan los préstamos en mora (en millones)
@@ -79,6 +83,7 @@ SELECT
 FROM credits;
 ```
 #### Resultados Obtenidos
+
 | Métrica / Variable | Resultado Obtenido | Diagnóstico & Impacto de Negocio |
 | :--- | :--- | :--- |
 | **Cartera Total Contratada** | **$312.32M USD** | Volumen total de capital originado en el portafolio analizado. |
@@ -99,6 +104,9 @@ Existen $77.09 millones de dólares inmovilizados o en inminente riesgo de pérd
 La tasa de morosidad calculada por monto (24.68%) es superior a la calculada por número de operaciones (21.82%). Este hallazgo demuestra que los créditos que caen en mora son, en promedio, de montos más elevados (high ticket), por lo que el impacto financiero recae fuertemente en las operaciones grandes.
 
 ### 2. ¿Qué perfil de cliente es el más peligroso para la empresa?
+
+#### Objetivo del Negocio
+
 Identificar qué combinación de variables socioeconómicas (tipo de vivienda y rango de ingresos anuales) incrementa drásticamente la tasa de mora para proponer modificaciones inmediatas en los filtros de aprobación automática (*hard filters*).
 
 #### Consulta SQL
@@ -117,6 +125,7 @@ GROUP BY tipo_de_vivienda, ingresos
 ORDER BY tasa_morosidad_monto DESC;
 ```
 #### Resultados Obtenidos (Top Segmentos de Riesgo)
+
 | tipo_de_vivienda | ingresos | total_clientes | cantidad_morosos | tasa_morosidad_monto |
 | :--- | :--- | :--- | :--- | :--- |
 | **OTHER** | Ingreso Bajo | 12 | 8 | **79.68%** |
@@ -133,6 +142,7 @@ ORDER BY tasa_morosidad_monto DESC;
 | **OWN** | Ingreso Medio | 1,412 | 22 | **2.31%** |
 
 #### Análisis e Impacto de Negocio
+
 1. **El Perfil de Mayor Peligro (RENT + Ingreso Bajo):**
 
 Los solicitantes que alquilan vivienda e ingresan menos de $30,000 USD/año registran una tasa de mora del 63.27%. Más de 6 de cada 10 dólares prestados a este segmento resultan impagados.
@@ -146,16 +156,17 @@ El grupo de alquiler con ingreso medio representa el segmento más grande de la 
 Tener vivienda propia demuestra ser el mayor factor de mitigación de riesgo. Incluso en niveles de ingreso medio, los propietarios muestran una tasa de impago de apenas 2.31%, situándose holgadamente por debajo del umbral de peligro del 5%.
 
 #### Recomendación Estratégica
+
 1. **Filtro Estricto para Alquiler/Bajo Ingreso:** Bloquear la aprobación automática para la combinación RENT + Ingreso Bajo o exigir un aval/garantía sólida.
 
 2. **Incentivos para Propietarios:** Aumentar la tasa de aprobación y ofrecer mejores condiciones a clientes con vivienda propia (OWN), ya que su comportamiento de pago es excepcionalmente estable.
 
---
-## 3. ¿Para qué se usa el dinero que no regresa?
 
-### Objetivo de Negocio
+### 3. ¿Para qué se usa el dinero que no regresa?
+
+#### Objetivo de Negocio
+
 Analizar el propósito del préstamo (`loan_intent`) para determinar si existen destinos con una probabilidad de impago significativamente superior que justifiquen restringir líneas de crédito o aplicar sobretasas por tipo de uso.
----
 
 ### Consulta SQL
 
@@ -173,6 +184,7 @@ GROUP BY destino_del_credito
 ORDER BY tasa_morosidad_monto DESC;
 ```
 #### Resultados Obtenidos
+
 | destino_del_credito | total_prestamos | total_prestado_millones | dinero_en_mora_millones | tasa_morosidad_monto |
 | :--- | :--- | :--- | :--- | :--- |
 | **DEBTCONSOLIDATION** | 5,212 | $51.00 | $14.77 | **28.96%** |
@@ -182,7 +194,8 @@ ORDER BY tasa_morosidad_monto DESC;
 | **EDUCATION** | 6,453 | $61.05 | $11.08 | **18.15%** |
 | **VENTURE** | 5,719 | $55.22 | $9.62 | **17.42%** |
 
-####Análisis e Impacto de Negocio
+#### Análisis e Impacto de Negocio
+
 1. **Destinos de Alto Riesgo (DEBTCONSOLIDATION y MEDICAL):**
 Los créditos destinados a Consolidación de Deuda (28.96%) y Gastos Médicos (28.09%) encabezan la tasa de impago. Entre ambos acumulan $30.80M USD en mora. Quienes solicitan fondos para cubrir emergencias de salud o refinanciar deudas previas ya enfrentan un sobreendeudamiento o vulnerabilidad previa que eleva drásticamente el riesgo de incobrabilidad.
 
@@ -190,6 +203,7 @@ Los créditos destinados a Consolidación de Deuda (28.96%) y Gastos Médicos (2
 Los préstamos para Emprendimiento / Negocios (17.42%) y Educación (18.15%) presentan las menores tasas de mora. Al destinarse a proyectos productivos o desarrollo profesional, muestran un retorno de inversión que favorece la capacidad de pago del cliente.
 
 #### Recomendación Estratégica
+
 1. **Ajuste en Consolidación y Salud:** Aplicar políticas de scoring más estrictas o requerir verificación de capacidad de pago asistida para solicitudes de DEBTCONSOLIDATION y MEDICAL.
 
 2. **Incentivos a Proyectos Productivos:** Fomentar y priorizar la colocación de créditos para VENTURE y EDUCATION, ya que sostienen una cartera más sana e impulsan el crecimiento del cliente.
