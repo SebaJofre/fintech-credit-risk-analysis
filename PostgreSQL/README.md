@@ -56,7 +56,7 @@ LIMIT 5;
 ## 2. Respuestas a las Preguntas de Negocio
 
 > 📂 **Código fuente completo:** Puedes consultar el script con las Preguntas de Negocio en [02_preguntas_de_negocio.sql](./02_preguntas_de_negocio.sql).
-
+---
 ### 1. ¿Cuál es la Tasa de Morosidad (Bad Loan Ratio) y cuánto dinero está costando?
 
 #### Objetivo del Negocio
@@ -102,7 +102,7 @@ Existen $77.09 millones de dólares inmovilizados o en inminente riesgo de pérd
 
 3. **Discrepancia entre Monto y Cantidad:**
 La tasa de morosidad calculada por monto (24.68%) es superior a la calculada por número de operaciones (21.82%). Este hallazgo demuestra que los créditos que caen en mora son, en promedio, de montos más elevados (high ticket), por lo que el impacto financiero recae fuertemente en las operaciones grandes.
-
+---
 ### 2. ¿Qué perfil de cliente es el más peligroso para la empresa?
 
 #### Objetivo del Negocio
@@ -160,8 +160,7 @@ Tener vivienda propia demuestra ser el mayor factor de mitigación de riesgo. In
 1. **Filtro Estricto para Alquiler/Bajo Ingreso:** Bloquear la aprobación automática para la combinación RENT + Ingreso Bajo o exigir un aval/garantía sólida.
 
 2. **Incentivos para Propietarios:** Aumentar la tasa de aprobación y ofrecer mejores condiciones a clientes con vivienda propia (OWN), ya que su comportamiento de pago es excepcionalmente estable.
-
-
+---
 ### 3. ¿Para qué se usa el dinero que no regresa?
 
 #### Objetivo de Negocio
@@ -207,12 +206,13 @@ Los préstamos para Emprendimiento / Negocios (17.42%) y Educación (18.15%) pre
 1. **Ajuste en Consolidación y Salud:** Aplicar políticas de scoring más estrictas o requerir verificación de capacidad de pago asistida para solicitudes de DEBTCONSOLIDATION y MEDICAL.
 
 2. **Incentivos a Proyectos Productivos:** Fomentar y priorizar la colocación de créditos para VENTURE y EDUCATION, ya que sostienen una cartera más sana e impulsan el crecimiento del cliente.
-
+---
 ### 4. ¿Se está cobrando el interés correcto según el riesgo del cliente?
 
 #### Objetivo de Negocio
+
 Evaluar la política de fijación de precios basada en riesgo (*Risk-Based Pricing*). Se busca comprobar si la tasa de interés compensa adecuadamente el riesgo asumido, tanto a nivel de antecedentes en buró (`cb_person_default_on_file`) como en las calificaciones internas de riesgo (`loan_grade`).
----
+
 
 #### Consultas SQL
 
@@ -239,13 +239,13 @@ GROUP BY calificacion_credito
 ORDER BY loan_grade ASC;
 ```
 #### Resultados Obtenidos
-Tabla A: Según Historial en Buró (Y = Antecedente de mora / N = Sin antecedente)
+**Tabla A: Según Historial en Buró (Y = Antecedente de mora / N = Sin antecedente)**
 | historial_crediticio | total_clientes | tasa_interes_promedio | tasa_morosidad_monto |
 | :--- | :--- | :--- | :--- |
 | **Y** | 5,744 | **14.51%** | **40.68%** |
 | **N** | 26,830 | **10.26%** | **21.03%** |
 
-Tabla B: Según Calificación Interna de Riesgo (loan_grade)
+**Tabla B: Según Calificación Interna de Riesgo (loan_grade)**
 | calificacion_credito | total_clientes | tasa_interes_promedio | tasa_morosidad_monto |
 | :--- | :--- | :--- | :--- |
 | **A** | 10,776 | **7.33%** | **11.09%** |
@@ -273,3 +273,4 @@ En la nota G, prácticamente la totalidad del capital prestado se pierde (99.85%
 1. **Mayor Recargo por Buró (Y):** Aumentar el diferencial de tasa o Endurecer la capacidad crediticia (cap de monto) para clientes con antecedentes en el buró, dado que una mora del 40% requiere un margen mayor para no generar pérdidas.
 
 2. **Corte de Originación (Cut-off) en Grados Críticos:** Desactivar la aprobación automática para los créditos con calificación D, E, F y G, o exigir garantías reales. La prima de riesgo requerida para cubrir una mora superior al 55% invalida la viabilidad financiera bajo las tasas actuales.
+---
