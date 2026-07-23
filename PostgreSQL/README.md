@@ -149,3 +149,47 @@ Tener vivienda propia demuestra ser el mayor factor de mitigación de riesgo. In
 1. **Filtro Estricto para Alquiler/Bajo Ingreso:** Bloquear la aprobación automática para la combinación RENT + Ingreso Bajo o exigir un aval/garantía sólida.
 
 2. **Incentivos para Propietarios:** Aumentar la tasa de aprobación y ofrecer mejores condiciones a clientes con vivienda propia (OWN), ya que su comportamiento de pago es excepcionalmente estable.
+
+--
+## 3. ¿Para qué se usa el dinero que no regresa?
+
+### Objetivo de Negocio
+Analizar el propósito del préstamo (`loan_intent`) para determinar si existen destinos con una probabilidad de impago significativamente superior que justifiquen restringir líneas de crédito o aplicar sobretasas por tipo de uso.
+---
+
+### Consulta SQL
+
+Se agruparon todas las operaciones por el propósito del crédito (`loan_intent`), calculando el volumen total prestado, el monto en mora y la tasa de morosidad ponderada por capital para cada categoría.
+
+```sql
+SELECT 
+    loan_intent AS destino_del_credito,
+    COUNT(*) AS total_prestamos,
+    ROUND(SUM(loan_amnt) / 1000000.0, 2) AS total_prestado_millones,
+    ROUND(SUM(CASE WHEN loan_status = 1 THEN loan_amnt ELSE 0 END) / 1000000.0, 2) AS dinero_en_mora_millones,
+    ROUND((SUM(CASE WHEN loan_status = 1 THEN loan_amnt ELSE 0 END)::DECIMAL / SUM(loan_amnt)) * 100, 2) AS tasa_morosidad_monto
+FROM credits
+GROUP BY destino_del_credito
+ORDER BY tasa_morosidad_monto DESC;
+```
+#### Resultados Obtenidos
+| destino_del_credito | total_prestamos | total_prestado_millones | dinero_en_mora_millones | tasa_morosidad_monto |
+| :--- | :--- | :--- | :--- | :--- |
+| **DEBTCONSOLIDATION** | 5,212 | $51.00 | $14.77 | **28.96%** |
+| **MEDICAL** | 6,071 | $57.06 | $16.03 | **28.09%** |
+| **HOMEIMPROVEMENT** | 3,605 | $35.21 | $9.20 | **26.13%** |
+| **PERSONAL** | 5,521 | $52.79 | $11.39 | **21.58%** |
+| **EDUCATION** | 6,453 | $61.05 | $11.08 | **18.15%** |
+| **VENTURE** | 5,719 | $55.22 | $9.62 | **17.42%** |
+
+####Análisis e Impacto de Negocio
+1. **Destinos de Alto Riesgo (DEBTCONSOLIDATION y MEDICAL):**
+Los créditos destinados a Consolidación de Deuda (28.96%) y Gastos Médicos (28.09%) encabezan la tasa de impago. Entre ambos acumulan $30.80M USD en mora. Quienes solicitan fondos para cubrir emergencias de salud o refinanciar deudas previas ya enfrentan un sobreendeudamiento o vulnerabilidad previa que eleva drásticamente el riesgo de incobrabilidad.
+
+2. **Destinos con Mejor Comportamiento (VENTURE y EDUCATION):**
+Los préstamos para Emprendimiento / Negocios (17.42%) y Educación (18.15%) presentan las menores tasas de mora. Al destinarse a proyectos productivos o desarrollo profesional, muestran un retorno de inversión que favorece la capacidad de pago del cliente.
+
+#### Recomendación Estratégica
+1. **Ajuste en Consolidación y Salud:** Aplicar políticas de scoring más estrictas o requerir verificación de capacidad de pago asistida para solicitudes de DEBTCONSOLIDATION y MEDICAL.
+
+2. **Incentivos a Proyectos Productivos:** Fomentar y priorizar la colocación de créditos para VENTURE y EDUCATION, ya que sostienen una cartera más sana e impulsan el crecimiento del cliente.
