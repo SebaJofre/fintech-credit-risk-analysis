@@ -117,23 +117,35 @@ GROUP BY tipo_de_vivienda, ingresos
 ORDER BY tasa_morosidad_monto DESC;
 ```
 #### Resultados Obtenidos (Top Segmentos de Riesgo)
-| Tipo de Vivienda | Rango de Ingresos | Diagnóstico & Impacto de Negocio |
-| :--- | :--- | :--- |
+| tipo_de_vivienda | ingresos | total_clientes | cantidad_morosos | tasa_morosidad_monto |
+| :--- | :--- | :--- | :--- | :--- |
+| **OTHER** | Ingreso Bajo | 12 | 8 | **79.68%** |
+| **RENT** | Ingreso Bajo | 2,604 | 1,413 | **63.27%** |
+| **OTHER** | Ingreso Medio | 57 | 20 | **48.18%** |
+| **RENT** | Ingreso Medio | 10,346 | 3,220 | **42.43%** |
+| **MORTGAGE** | Ingreso Bajo | 482 | 147 | **31.72%** |
+| **OWN** | Ingreso Bajo | 571 | 159 | **25.33%** |
+| **RENT** | Ingreso Alto | 3,492 | 558 | **22.43%** |
+| **OTHER** | Ingreso Alto | 38 | 5 | **18.47%** |
+| **MORTGAGE** | Ingreso Medio | 6,575 | 949 | **16.27%** |
+| **MORTGAGE** | Ingreso Alto | 6,384 | 594 | **11.37%** |
+| **OWN** | Ingreso Alto | 601 | 12 | **3.20%** |
+| **OWN** | Ingreso Medio | 1,412 | 22 | **2.31%** |
 
 #### Análisis e Impacto de Negocio
-El Perfil de Mayor Peligro (RENT + Ingreso Bajo):
+1. **El Perfil de Mayor Peligro (RENT + Ingreso Bajo):**
 
 Los solicitantes que alquilan vivienda e ingresan menos de $30,000 USD/año registran una tasa de mora del 63.27%. Más de 6 de cada 10 dólares prestados a este segmento resultan impagados.
 
-Volumen vs. Concentración de Riesgo (RENT + Ingreso Medio):
+2. **Volumen vs. Concentración de Riesgo (RENT + Ingreso Medio):**
 
 El grupo de alquiler con ingreso medio representa el segmento más grande de la base (10,346 clientes). Sin embargo, presenta una tasa de mora críticamente alta del 42.43% (3,220 morosos), convirtiéndose en la fuente principal de volumen de pérdidas en dinero.
 
-El Factor Protector de la Vivienda Propia (OWN):
+3. **El Factor Protector de la Vivienda Propia (OWN):**
 
 Tener vivienda propia demuestra ser el mayor factor de mitigación de riesgo. Incluso en niveles de ingreso medio, los propietarios muestran una tasa de impago de apenas 2.31%, situándose holgadamente por debajo del umbral de peligro del 5%.
 
 #### Recomendación Estratégica
-Filtro Estricto para Alquiler/Bajo Ingreso: Bloquear la aprobación automática para la combinación RENT + Ingreso Bajo o exigir un aval/garantía sólida.
+1. **Filtro Estricto para Alquiler/Bajo Ingreso:** Bloquear la aprobación automática para la combinación RENT + Ingreso Bajo o exigir un aval/garantía sólida.
 
-Incentivos para Propietarios: Aumentar la tasa de aprobación y ofrecer mejores condiciones a clientes con vivienda propia (OWN), ya que su comportamiento de pago es excepcionalmente estable.
+2. **Incentivos para Propietarios:** Aumentar la tasa de aprobación y ofrecer mejores condiciones a clientes con vivienda propia (OWN), ya que su comportamiento de pago es excepcionalmente estable.
