@@ -47,7 +47,12 @@ Cantidad Morosos = CALCULATE(COUNT(credit_risk_dataset[loan_status]),credit_risk
 // 6. Porcentaje de Morososidad en Monto:
 % Morososidad Monto = DIVIDE([Monto en Mora],[Total Dinero Prestado],0)
 ```
+> **Formato:**
+* Las medidas `[Total Dinero Prestado]` y `[Monto en Mora]` fueron formateadas explícitamente como **Moneda (`$`)** sin decimales dentro de la vista de datos de Power BI.
+* Las medidas `[Total Clientes]` y `[Cantidad Morosos]` fueron formateadas explícitamente como **Número entero** sin decimales dentro de la vista de datos de Power BI.
+* Las medidas `[Tasa Interes Promedio]` y `[Porcentaje de Morososidad en Monto]` fueron formateadas explícitamente como **Porcentaje (`%`)** con 2 decimales dentro de la vista de datos de Power BI.
 
+---
 
 ---
 [Reporte de Riesgo Crediticio](Reporte%20Credit%20Risk.png)
