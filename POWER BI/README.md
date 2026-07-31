@@ -1,6 +1,12 @@
 # Módulo de Visualización e Indicadores KPI (Power BI)
 
-Este repositorio contiene la configuración, transformación de datos y modelado en **Power BI** para el panel de control de seguimiento de métricas operativas y análisis de desempeño.
+Este repositorio contiene el desarrollo del proyecto de análisis, procesamiento de datos y diseño del **Dashboard Ejecutivo de Riesgo Crediticio** en **Power BI**, orientado al monitoreo de la morosidad, evaluación del scoring crediticio y perfilamiento de clientes.
+
+---
+
+## Resumen del Proyecto
+
+El objetivo principal de este informe es evaluar la salud de la cartera de créditos, identificar los factores de mayor riesgo de impago (segmentados por destino del crédito, tipo de vivienda, nivel de ingresos y scoring) y monitorear los indicadores clave de desempeño (KPIs) para la toma de decisiones financieras.
 
 ---
 
@@ -47,12 +53,39 @@ Cantidad Morosos = CALCULATE(COUNT(credit_risk_dataset[loan_status]),credit_risk
 // 6. Porcentaje de Morososidad en Monto:
 % Morososidad Monto = DIVIDE([Monto en Mora],[Total Dinero Prestado],0)
 ```
-> **Formato:**
+**Formato:**
 * Las medidas `[Total Dinero Prestado]` y `[Monto en Mora]` fueron formateadas explícitamente como **Moneda (`$`)** sin decimales dentro de la vista de datos de Power BI.
 * Las medidas `[Total Clientes]` y `[Cantidad Morosos]` fueron formateadas explícitamente como **Número entero** sin decimales dentro de la vista de datos de Power BI.
 * Las medidas `[Tasa Interes Promedio]` y `[Porcentaje de Morososidad en Monto]` fueron formateadas explícitamente como **Porcentaje (`%`)** con 2 decimales dentro de la vista de datos de Power BI.
 
 ---
+## 3. Estructura del Dashboard y Objetos Visuales
 
+El reporte interactivo se divide en tres bloques analíticos estratégicos:
+
+### A. Tarjetas KPI Superiores (Resumen Ejecutivo)
+* **Total Créditos:** \$312 mill. (Volumen total prestado)
+* **Monto en Mora:** \$77 mill. (Deuda en riesgo/impago)
+* **% Morosidad:** **24.68%** (Métrica principal de control)
+* **Cantidad Morosos:** 7,107 clientes
+* **Créditos Total Operaciones:** 32.6 mil contratos
+
+### B. Análisis de Tendencia y Comportamiento de Impago
+* **Monto en Créditos Otorgados y % de Morosidad por Destino:**
+  * Combinación de columnas cargadas con la línea del `% Morosidad Monto`.
+  * *Hallazgo:* Los créditos destinados a Consolidación de Deuda (`DEBTCONSOLIDATION`) registran la mayor tasa de morosidad (33.1%).
+* **Monto en Créditos Otorgados y % de Morosidad por Propiedad de Vivienda:**
+  * Evaluación del riesgo según la tenencia de vivienda (`OWN`, `MORTGAGE`, `RENT`, `OTHER`).
+  * *Hallazgo:* La categoría `RENT` presenta el pico mayor de tasa de mora (38.3%).
+
+### C. Segmentación de Riesgo y Perfilamiento de Ingresos
+* **% de Morosidad por Scoring Crediticio (Grado A - G):**
+  * Gráfico de columnas que demuestra la validez predictiva del modelo de scoring, observándose una escala ascendente de morosidad desde la categoría **A** (11.1%) hasta la categoría **G** (99.9%).
+* **% de Morosidad por Rango de Ingresos (Treemap):**
+  * Distribución del riesgo según el nivel socioeconómico:
+    * **Ingreso Bajo:** 53.05% de la morosidad total.
+    * **Ingreso Medio:** 29.86%.
+    * **Ingreso Alto:** 14.52%.
 ---
+![Reporte de Riesgo Crediticio](Reporte%20Credit%20Risk.png)
 [Reporte de Riesgo Crediticio](Reporte%20Credit%20Risk.png)
