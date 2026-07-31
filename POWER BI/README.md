@@ -86,6 +86,21 @@ El reporte interactivo se divide en tres bloques analíticos estratégicos:
     * **Ingreso Bajo:** 53.05% de la morosidad total.
     * **Ingreso Medio:** 29.86%.
     * **Ingreso Alto:** 14.52%.
----
+
 ![Reporte de Riesgo Crediticio](Reporte%20Credit%20Risk.png)
 [Reporte de Riesgo Crediticio](Reporte%20Credit%20Risk.png)
+
+---
+
+## Conclusiones Generales del Análisis en Power BI
+
+El monitoreo interactivo del **Reporte Ejecutivo de Riesgo Crediticio** en Power BI permitió consolidar y visualizar de forma estratégica los hallazgos clave de la cartera:
+
+* **Vulnerabilidad y Exposición Global:** La tasa de morosidad global se sitúa en un **24.68% por monto**, representando un total de **$77M USD en deuda morosa** sobre los $312M USD prestados. Este nivel de impago excede ampliamente los umbrales de tolerancia financiera recomendados.
+* **Predicción Efectiva por Scoring Crediticio:** El modelo de clasificación interna (A-G) muestra una correlación directa y ascendente con el nivel de mora. Mientras que la categoría **A** registra la morosidad más baja (**11.1%**), las categorías **F y G** muestran niveles críticos de incobrabilidad (**70.4% y 99.9%** respectivamente).
+* **Concentración del Riesgo por Nivel Socioeconómico:** El desglose por rango de ingresos evidencia que el **53.05% de la mora total** se concentra en el segmento de **Ingreso Bajo**, seguido del **29.86%** en Ingreso Medio y solo un **14.52%** en Ingreso Alto.
+* **Impacto de la Tenencia de Vivienda y Destino:**
+  * **Por Propiedad:** Los clientes en situación de alquiler (**RENT**) acumulan la mayor masa de crédito prestado ($146M USD) con una tasa de mora elevada, mientras que la categoría **OTHER** alcanza el pico más alto de morosidad (**37.3%**). Por el contrario, los propietarios (**OWN**) representan la cartera más sana con solo un **5.6%** de mora.
+  * **Por Destino:** Los créditos otorgados para **Consolidación de Deuda** (`DEBTCONSOLIDATION`) y **Gastos Médicos** (`MEDICAL`) concentran las mayores tasas de incumplimiento (**33.1% y 32.3%**), confirmando que el financiamiento de pasivos previos o emergencias presenta un menor índice de recupero.
+
+---
